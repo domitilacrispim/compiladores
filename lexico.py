@@ -1,3 +1,4 @@
+import sys	
 import csv
 comp = open('compiladores.csv', 'r')
 dici = {}
@@ -25,13 +26,15 @@ atual=arquivo[pos]
 while(True):
   if(atual==" " or atual=="\n" or atual=="EOF"):
    atual="branco"
+#  print(estado, atual)
   estado=int(dici[atual][estado])
   pos=pos+1
   if(estado==-1):
    print("Error na posicao", pos)
+   sys.exit(0)
   if(int(dici["isFinal"][estado])==1):
    print(dici["value"][estado])
-   if(dici["goBack"][estado]==1):
+   if(int(dici["goBack"][estado])==1):
     pos=pos-1
    estado=0
   if(pos==len(arquivo)):
@@ -44,6 +47,4 @@ if(estado==-1):
    print("Error na posicao", pos)
 if(int(dici["isFinal"][estado])==1):
    print(dici["value"][estado])
-   if(dici["goBack"][estado]==1):
-    pos=pos-1
-   estado=0
+   
