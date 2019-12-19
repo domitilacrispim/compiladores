@@ -28,7 +28,11 @@ def lexico(pos):
    if(atual==" " or atual=="\n" or atual=="EOF"):
     atual="branco"
   # print(estado, atual)
-   estado=int(dici[atual][estado])
+   try:
+    estado=int(dici[atual][estado])
+   except:
+    print("O simbolo nao faz parte da gramatica")
+    return "$", -1
    pos=pos+1
    if(estado==-1):
     print("Error na posicao", pos)
@@ -165,13 +169,13 @@ while(len(pilha) > 0):
            #  print(prox)
              break
         else:
-            print(prox, x)
-            print("ERRO1")
+           # print(prox, x)
+            print(x, " esperado, token recebido ", prox)
             break
     else:
         if(dici[x][prox] == ""):
             print(x, prox)
-            print("ERRO2")
+            print(prox, " nao esperado"	)
             break
         else:
             pai = pilha[len(pilha)-1]
@@ -184,12 +188,11 @@ while(len(pilha) > 0):
             if(flag_proc == 1):
                 raiz.processador(pai)
 
-if (prox != "$"):
+if (prox != "$" or len(pilha)!=0):
     print("ERRO")	
 else:
     print("\nCadeia Aceita!!")
     print('\nArvore:')
     print(raiz.valor, end="")
     raiz.percorre()
-
 
