@@ -81,7 +81,7 @@ def lexico(pos):
       col=col-1
      if(arquivo[inicial:pos] not in tabela_simbol):
       tabela_simbol.append(arquivo[inicial:pos])
-     return "id",pos, arquivo[inicial:pos]
+     return "id",pos, tabela_simbol.index(arquivo[inicial:pos])
     else:
       if(int(dici["goBack"][estado])==1):
        pos=pos-1
@@ -191,7 +191,7 @@ prox, pos, valorz = lexico(0)
 while(len(pilha) > 0):
     flag_proc = 0
     x = pilha[len(pilha)-1]
-#    print(pilha)
+    print(pilha)
     # print(prox)
     if(x not in nao_t):
         if(x == prox):

@@ -1,10 +1,20 @@
+
 programa 
 inicio
- int i , op;
- int idd, id;
- se ((sea+9))
-  inicio
-  r=(3+1)/(2+2);
-  sea=2;
-fim
+    int x; int y;
+
+    x = 0;
+    y = 0;
+
+    enquanto (x <> 10)
+    inicio
+
+        x = x + 1;
+
+        se (x == 10)
+        inicio
+            y=1;
+        fim
+
+    fim
 fim
