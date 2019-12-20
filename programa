@@ -1,7 +1,10 @@
 programa 
 inicio
- se(sea)
+ int i , op;
+ int idd, id;
+ se ((sea+9))
   inicio
-  r=((3+1)/2+2);
+  r=(3+1)/(2+2);
+  sea=2;
 fim
 fim

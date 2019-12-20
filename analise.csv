@@ -1,4 +1,4 @@
-,inicio,fim,int,se,programa,else,enquanto,id,digito,aritmetico,atribuicao,relacional,(,),;,VIR,$
+,inicio,fim,int,se,programa,else,enquanto,id,digito,aritmetico,atribuicao,relacional,(,),;,vir,$
 S,,,,,1,,,,,,,,,,,,
 PROGRAMA,,,,,3,,,,,,,,,,,,
 BLOCO,4,,,,,,,,,,,,,,,,
@@ -12,8 +12,7 @@ COND,,,,,,,,,,,,12,,2,,,
 D,,2,,2,,10,2,2,,,,,,,,,
 REPETICAO,,2,,,,,13,,,,,,,,,,
 ATRIBUICAO,,2,,,,,,14,,,,,,,,,
-EXPRESSAO,,,,,,,,17,17,,,,22,,,,
-E,,,,,,,,,,18,,2,,2,2,,
-F,,,,,,,,17,17,,,,,,,,
-TERMO,,,,,,,,19,20,,,,"
-",,,,
+EXPRESSAO,,,,,,,,17,17,,,,17,,,,
+E,,,,,,,,,,18,,2,2,2,2,,
+F,,,,,,,,17,17,,,,17,,,,
+TERMO,,,,,,,,19,20,,,,22,,,,

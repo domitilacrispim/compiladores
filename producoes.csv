@@ -4,7 +4,7 @@ programa,BLOCO,,,,
 inicio,DECLARACAO,COMANDO,fim,,
 int,id,A,B,;,DECLARACAO
 atribuicao,EXPRESSAO,,,,
-vir,ID,A,B,,
+vir,id,A,B,,
 SELECAO,COMANDO,,,,
 se,CONDICAO,BLOCO,SELECAO,D,
 else,BLOCO,,,,

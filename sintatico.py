@@ -1,8 +1,13 @@
 import csv
 import sys
+global tabela_simbol
+global nao_t
 tabela_simbol=[]
+global max_n
+global col, lin
 col=0
 lin=0
+max_n=0
 def lexico(pos):
  global lin, col, tabela_simbol
  comp = open('compiladores.csv', 'r')
@@ -37,6 +42,8 @@ def lexico(pos):
     f_inicio=1
     inicial=pos
   # print(estado, atual)
+   if(atual==","):
+    atual="vir"
    try:
     estado=int(dici[atual][estado])
    except:
@@ -63,13 +70,17 @@ def lexico(pos):
       pos=pos-1
       col=col-1
      return "atribuicao",pos, dici["value"][estado]
+    elif(dici["value"][estado]=="vir"):  
+     if(int(dici["goBack"][estado])==1):
+      pos=pos-1
+      col=col-1
+     return "vir",pos, dici["value"][estado]
     elif(dici["value"][estado]=="id"):  
      if(int(dici["goBack"][estado])==1):
       pos=pos-1
       col=col-1
      if(arquivo[inicial:pos] not in tabela_simbol):
       tabela_simbol.append(arquivo[inicial:pos])
-      print(arquivo[inicial:pos],  inicial,pos+1)
      return "id",pos, arquivo[inicial:pos]
     else:
       if(int(dici["goBack"][estado])==1):
@@ -105,8 +116,11 @@ class No:
                 filho.processador(valor)
 
     def addFilho(self, valor, pai):
+        global max_n
         if(pai == self.valor and not(self.processado)):
             self.filhos.append(No(valor, self.nivel+1))
+            if(self.nivel+1>max_n):
+             max_n=self.nivel+1
             return 1
         if(len(self.filhos) == 0):
             return 0
@@ -115,27 +129,19 @@ class No:
                 return 1
 
     def percorre(self, n):
+        global nao_t
         flagui = 0
         if(self.nivel>n):
          return 0
-        if(self.nivel==n):
+        if(self.nivel==n and self.valor in nao_t):
+         print("<", end="")
          for filho in reversed(self.filhos):
-             if(flagui == 0):
-                 print("<", end="")
-                 flagui = 1
-             print(filho.valor, " ", filho.nivel, " " , end="")
-         if(flagui == 1):
-             print(">")
-         for filho in reversed(self.filhos):
-             if(filho.percorre(n+1)==3):
-              flagui=3
-         return 3
+             print(filho.valor, " " , end="")
+         print("> ", end="")
         if(self.nivel<n):
          for filho in reversed(self.filhos):
-             if(filho.percorre(n+1)==3):
-              flagui=3
-         if(flagui==3):
-     	    print("")
+             filho.percorre(n)
+
          
 
 prod = open('producoes.csv', 'r')
@@ -168,7 +174,6 @@ for i in reader:
         for c in i:
             dici[i[0]][cabecalho[aux]] = c
             aux = aux+1
-print(dici["inicio"])     
 # carrega nao terminais
 nao_t = []
 reader = csv.reader(n_term)
@@ -182,7 +187,6 @@ raiz = No("S",0)
 flag = 0
 flag_proc = 0
 prox, pos, valorz = lexico(0)
-print(prox)
 # print(prox)
 while(len(pilha) > 0):
     flag_proc = 0
@@ -200,12 +204,12 @@ while(len(pilha) > 0):
              break
         else:
            # print(prox, x)
-            print(x, " esperado, token recebido ", prox)
+            print(x, " esperado, token recebido ", prox, "linha:", lin, "coluna:", col)
             break
     else:
+        print(x, prox)
         if(dici[x][prox] == ""):
-            print(x, prox)
-            print(prox, " nao esperado"	)
+            print(prox, " nao esperado", "linha:", lin, "coluna:", col)
             break
         else:
             pai = pilha[len(pilha)-1]
@@ -223,8 +227,9 @@ if (prox != "$" or len(pilha)!=0):
 else:
     print("\nCadeia Aceita!!")
     print('\nArvore:')
-    print(raiz.valor)
-    raiz.percorre(0)
-global tabela_simbol
-print(tabela_simbol)
+    print("<",raiz.valor,">")
+    for i in range(max_n):
+     raiz.percorre(i)
+     print("")
+    print(tabela_simbol)
 
