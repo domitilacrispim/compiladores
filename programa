@@ -1,19 +1,7 @@
-programa
+programa 
 inicio
-    int x; int y;
-
-    x = 0;
-    y = 0;
-
-    enquanto (x <> 10)
-    inicio
-
-        x = x + 1;
-
-        se (x == 10)
-        inicio
-            y=1;
-        fim
-
-    fim
+ se(sea)
+  inicio
+  r=((3+1)/2+2);
+fim
 fim
